@@ -1,7 +1,7 @@
-#**Application Name:**
+# **Application Name:**
 ## 
-#**Project Topic/Objective:**
+# **Project Topic/Objective:**
 ##
-#**Motivation:**
+# **Motivation:**
 ##
-#**Server-Side Components:**
+# **Server-Side Components:**
