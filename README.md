@@ -1,5 +1,5 @@
 # **Application Name:**
-## 🏥  [HappyClinic]
+## 🏥  HappyClinic
 
 # **Project Topic/Objective:**
 * HappyClinic's objective is to provide a platform where primary care 
