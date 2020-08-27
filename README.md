@@ -1,9 +1,9 @@
 # **Application Name:**
-## 🏥  HappyClinic
+## 🏥  [HappyClinic]
 
 # **Project Topic/Objective:**
 * HappyClinic's objective is to provide a platform where primary care 
-  providers and their authorize employees input, maintain, and update 
+  providers, and their authorize employees input, maintain, and update 
   patients' information in a more effective and efficient way
 # **Motivation:**
 * I appreciate the effort my primary care physician provides, unfortunately,
