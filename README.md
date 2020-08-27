@@ -11,6 +11,8 @@
  fifteen minutes every visit. He needs help now!
 # **Server-Side Components:**
 * In order to achieve efficient organization and fast retrieval of patient's information, the need of a database rises.
+
+* ![Demo](db_pic.PNG)
  
 ### 🔶 Under Construction
 
