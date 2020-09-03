@@ -25,7 +25,8 @@ be readily available to expedite the paperwork and have more time leftover to im
  relationship.
  
 # **Server-Side Components:**
-* In order to achieve this objective, the need of a design for database environment arises.
+* In order to achieve this objective, the need of a design for database environment arises for the proper storing,
+ optimize retrieval and encryption of patients’ sensitive data.
 
 * ![Demo](db_pic.PNG)
  
