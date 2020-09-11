@@ -3,19 +3,40 @@ package online.happyclinic.web;
 import online.happyclinic.RequestInfo;
 import online.happyclinic.RequestInfo.Type;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/design")// This is going to handle multiple types of operations
+@RequestMapping("/requestinfo")// This is going to handle multiple types of operations
 public class DesignController {
 
     @GetMapping
     public String showDesignForm(){
-        return "design";
+        return "requestinfo";
+    }
+
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        List<RequestInfo> RequestInfo = createRequestInfoList();
+        Type[] types = online.happyclinic.RequestInfo.Type.values();
+        for (Type type: types) {
+            model.addAttribute(type.toString().toLowerCase(), filterByType(RequestInfo, type));
+        }
+
+
+    }
+
+    private List<RequestInfo> filterByType(List<RequestInfo> RequestInfo, Type type) {
+        return RequestInfo
+                .stream()
+                .filter(x -> x.getType().equals(type))
+                .collect(Collectors.toList());
     }
 
     private List<RequestInfo> createRequestInfoList() {
