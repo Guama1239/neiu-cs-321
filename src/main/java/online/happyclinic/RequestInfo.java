@@ -9,7 +9,6 @@ public class RequestInfo {
     private final Type type;
 
     public static enum Type {
-        GENERAL_PRACTICE, DENTAL_PRACTICE, PODIATRY_PRACTICE,
-        OPTICAL_CLINIC, ORTHOPEDIC_PRACTICE, MENTAL_HEALTH_PRACTICE
+        FACILITY_TYPE, MEDICAL_SERVICES;
     }
 }

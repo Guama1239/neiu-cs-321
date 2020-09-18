@@ -6,12 +6,47 @@
     <meta charset="UTF-8">
     <title>Happy Clinic</title>
     <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/hospital_1f3e5.png">
+    <link rel="stylesheet" href="/stylesri.css">
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Request Information</h1>
     <h1>🏥</h1>
     <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
+    <hr/>
+    <div style="clear: both;"></div>
+    <form method="post" class="center" th:object="${design}">
+        <span class="validationError"
+            th:if="${#fields.hasErrors('RequestsInfo')}"
+            th:errors="*{RequestsInfo}">RequestsInfo Error</span>
+        <div class="grid">
+            <div class="ingredient-group" id="Facility_Type">
+                <h3>Select type of facility</h3>
+                <div th:each="RequestInfo : ${facility_type}">
+                    <input name="RequestsInfo" type="checkbox" th:value="${RequestInfo.id}"/>
+                    <span th:text="${RequestInfo.name}">RequestInfo</span><br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="Medical_Services">
+                <h3>Select medical services</h3>
+                <div th:each="RequestInfo : ${medical_services}">
+                    <input name="RequestsInfo" type="checkbox" th:value="${RequestInfo.id}"/>
+                    <span th:text="${RequestInfo.name}">RequestInfo</span><br/>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="center">Full Name</h3>
+            <input type="text"; class="center" th:field="*{name}"/>
+            <span class="validationError"
+                th:if="${#fields.hasErrors('name')}"
+                th:errors="*{name}">Name Error</span>
+            <br/><br/>
+            <button class="center">Submit your request</button>
+        </div>
+    </form>
     <div class="footer">
         <div class="center-me">
             <p>&nbsp;</p>
