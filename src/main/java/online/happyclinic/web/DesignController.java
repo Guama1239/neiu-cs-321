@@ -1,15 +1,17 @@
 package online.happyclinic.web;
 
 import lombok.extern.slf4j.Slf4j;
-import online.happyclinic.RequestInfo;
-import online.happyclinic.RequestInfo.Type;
+import online.happyclinic.Order;
+import online.happyclinic.Request;
+import online.happyclinic.RequestType;
+import online.happyclinic.RequestType.Type;
+import online.happyclinic.data.RequestRepository;
+import online.happyclinic.data.RequestTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -18,8 +20,18 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
-@RequestMapping("/requestinfo")// This is going to handle multiple types of operations
+@RequestMapping("/requestinfo")
+@SessionAttributes("order")
 public class DesignController {
+
+    private final RequestTypeRepository RequestTypeRepo;
+    private final RequestRepository requesRepo;
+
+    @Autowired
+    public DesignController(RequestTypeRepository RequestTypeRepo, RequestRepository requesRepo) {
+        this.RequestTypeRepo = RequestTypeRepo;
+        this.requesRepo = requesRepo;
+    }
 
     @GetMapping
     public String showDesignForm(){
@@ -27,49 +39,41 @@ public class DesignController {
     }
 
     @PostMapping
-    public String processRequestInfo(@Valid @ModelAttribute("design") Request design, Errors errors){
+    public String processRequestInfo(@Valid @ModelAttribute("design") Request design, Errors errors, Model model){
         if (errors.hasErrors())
             return "requestinfo";
 
+        Request saveRequest = requesRepo.save(design);
+        Order order = (Order) model.getAttribute("order");
+        order.addDesign(saveRequest);
+        log.info("Processing..." + design);
         return "redirect:/requests/current";
+
     }
 
     @ModelAttribute
     public void addAttributes(Model model) {
-        List<RequestInfo> RequestsInfo = createRequestInfoList();
-        Type[] types = RequestInfo.Type.values();
+        List<RequestType> RequestsInfo = (List<RequestType>) RequestTypeRepo.findAll();
+        //List<RequestType> RequestsInfo = createRequestInfoList();
+        Type[] types = RequestType.Type.values();
         for (Type type: types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(RequestsInfo, type));
         }
-        model.addAttribute("design", new Request());
+    //        model.addAttribute("design", new Request());
     }
 
-    private List<RequestInfo> filterByType(List<RequestInfo> RequestsInfo, Type type) {
+    @ModelAttribute(name = "design")
+    public Request addRequestToModel() {return new Request();}
+
+    @ModelAttribute(name = "order")
+    public Order addOrderToModel(){ return new Order();}
+
+    private List<RequestType> filterByType(List<RequestType> RequestsInfo, Type type) {
         return RequestsInfo
                 .stream()
                 .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());
     }
 
-    private List<RequestInfo> createRequestInfoList() {
-        List<RequestInfo> RequestsInfo = Arrays.asList(
-                new RequestInfo("ASC", "Ambulatory surgical services", Type.FACILITY_TYPE),
-                new RequestInfo("BC", "Birth center", Type.FACILITY_TYPE),
-                new RequestInfo("BB", "Blood banks", Type.FACILITY_TYPE),
-                new RequestInfo("CMF", "Clinics and medical offices", Type.FACILITY_TYPE),
-                new RequestInfo("DEC", "Diabetes education centers", Type.FACILITY_TYPE),
-                new RequestInfo("DC", "Dialysis Centers", Type.FACILITY_TYPE),
-                new RequestInfo("HH", "Hospice homes", Type.FACILITY_TYPE),
-                new RequestInfo("HO", "Hospitals", Type.FACILITY_TYPE),
-                new RequestInfo("IRC", "Imaging and radiology centers", Type.FACILITY_TYPE),
-                new RequestInfo("MHT", "Mental health and addiction treatment centers", Type.FACILITY_TYPE),
-                new RequestInfo("NH", "Nursing homes", Type.FACILITY_TYPE),
-                new RequestInfo("ORC", "Orthopedic and other rehabilitation centers", Type.FACILITY_TYPE),
-                new RequestInfo("TLH", "Telehealth", Type.FACILITY_TYPE),
-                new RequestInfo("IC", "Inpatient care", Type.MEDICAL_SERVICES),
-                new RequestInfo("UC", "Urgent care", Type.MEDICAL_SERVICES),
-                new RequestInfo("AC", "Ambulatory care", Type.MEDICAL_SERVICES)
-        );
-        return RequestsInfo;
-    }
+
 }

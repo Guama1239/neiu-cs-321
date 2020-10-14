@@ -9,15 +9,13 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Welcome to Happy Clinic</h1>
+    <h1 th:text="${title}"></h1>
     <h1>🏥</h1>
     <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
+    <div th:fragment="content"><h1> </h1></div>
 
     <div class="footer">
         <div class="center-me">
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
