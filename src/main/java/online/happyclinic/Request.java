@@ -17,7 +17,7 @@ import java.util.List;
 public class Request {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private LocalDateTime createdAt;
 

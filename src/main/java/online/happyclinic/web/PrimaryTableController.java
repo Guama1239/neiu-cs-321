@@ -24,7 +24,9 @@ public class PrimaryTableController {
     }
 
     @GetMapping
-    public String displayPtable() { return "primarytableview";}
+    public String displayPtable(Model model) {
+        model.addAttribute("title", "Database Order Table Info");
+        return "primarytableview";}
 
 
     @ModelAttribute("orders")

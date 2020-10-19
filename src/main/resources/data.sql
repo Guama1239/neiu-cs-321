@@ -1,6 +1,6 @@
 //delete from Request_Request_Types;
-/*
 
+/*
 delete from Request_Order_Requests;
 delete from Request_Order;
 delete from Request;
@@ -8,6 +8,7 @@ delete from Request;
 
 
 delete from Request_Type;
+*//*
 insert into Request_Type(id, name, type)
 values ('ASC', 'Ambulatory surgical services', 'FACILITY_TYPE');
 insert into Request_Type(id, name, type)
