@@ -16,8 +16,7 @@ import javax.persistence.Id;
 // that is the reason we need a no arg constructor below
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-
-public class RequestType {
+public class Service {
 
     @Id
     private final String id;
@@ -25,7 +24,7 @@ public class RequestType {
     @Enumerated(EnumType.STRING)
     private final Type type;
 
-    public static enum Type {
-        FACILITY_TYPE, MEDICAL_SERVICES
+    public enum Type {
+        FACILITY_TYPE, MEDICAL_SERVICES;
     }
 }

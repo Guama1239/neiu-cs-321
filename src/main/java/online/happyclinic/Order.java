@@ -13,14 +13,14 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Request_Order")
+@Table(name = "Facility_Order")
 
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)// change from AUTO
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDateTime placedAt;
 
@@ -39,10 +39,10 @@ public class Order implements Serializable {
     @Pattern(regexp = "[0-9]{5}", message = "Zip code must be 5 digits")
     private String zip;
 
-    @ManyToMany(targetEntity = Request.class)
-    private List<Request> requests = new ArrayList<>();
+    @ManyToMany(targetEntity = Facility.class)
+    private List<Facility> facilities = new ArrayList<>();
 
-    public void addDesign(Request design) {this.requests.add(design);}
+    public void addDesign(Facility facility) {this.facilities.add(facility);}
 
     @PrePersist
     void placedAt() {

@@ -4,6 +4,7 @@ package online.happyclinic;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,20 +15,21 @@ import java.util.List;
 @Entity
 // Do not have to worry about the no arg constructor because
 // we want to it to be a public available nor arg constructor which comes with @Entity
-public class Request {
+public class Facility {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDateTime createdAt;
 
     @NotNull(message = "Name is required")
+    @NotBlank(message = "Name is required")
     @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
 
-    @ManyToMany(targetEntity = RequestType.class)
+    @ManyToMany(targetEntity = Service.class)
     @NotEmpty(message = "You must choose at least 1 type of facility")
-    private List<RequestType> RequestsInfo;
+    private List<Service> services;
 
     @PrePersist
     void createdAt() {

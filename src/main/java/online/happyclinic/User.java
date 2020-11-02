@@ -30,19 +30,16 @@ public class User implements UserDetails {
     private final String username;
     private final String password;
     private final String fullName;
-    private final String email; // 4.2 extra probably things I want my users to have
     private final String street;
     private final String city;
     private final String state;
     private final String zip;
-    private final String phoneNumer;
-
+    private final String phoneNumber;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

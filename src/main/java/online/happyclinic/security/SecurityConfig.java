@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(encoder());
     }
 
-    @Bean
+    @Bean // the instantiation creates a singleton
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
@@ -35,14 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/requestinfo", "/orders")
+                .antMatchers("/registerfacility", "/orders")
                 .hasRole("USER")
                 .and()
             .authorizeRequests()
                 .antMatchers("/h2-console/**")
                 .permitAll();
 
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+        http.csrf().disable(); // enable in production
+        http.headers().frameOptions().disable(); // enable in production
 }
 }

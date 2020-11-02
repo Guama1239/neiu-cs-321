@@ -15,30 +15,30 @@
     <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
     <hr/>
     <div style="clear: both;"></div>
-    <form method="post" class="center" th:object="${design}">
+    <form method="post" class="center" th:object="${facility}">
         <span class="validationError"
-            th:if="${#fields.hasErrors('RequestsInfo')}"
-            th:errors="*{RequestsInfo}">RequestsInfo Error</span>
+            th:if="${#fields.hasErrors('services')}"
+            th:errors="*{services}">services Error</span>
         <div class="grid">
             <div class="ingredient-group" id="Facility_Type">
                 <h3>Select type of facility</h3>
-                <div th:each="RequestInfo : ${facility_type}">
-                    <input name="RequestsInfo" type="checkbox" th:value="${RequestInfo.id}"/>
-                    <span th:text="${RequestInfo.name}">RequestInfo</span><br/>
+                <div th:each="registerfacility : ${facility_type}">
+                    <input name="services" type="checkbox" th:value="${registerfacility.id}"/>
+                    <span th:text="${registerfacility.name}">registerfacility</span><br/>
                 </div>
             </div>
 
             <div class="ingredient-group" id="Medical_Services">
                 <h3>Select medical services</h3>
-                <div th:each="RequestInfo : ${medical_services}">
-                    <input name="RequestsInfo" type="checkbox" th:value="${RequestInfo.id}"/>
-                    <span th:text="${RequestInfo.name}">RequestInfo</span><br/>
+                <div th:each="registerfacility : ${medical_services}">
+                    <input name="services" type="checkbox" th:value="${registerfacility.id}"/>
+                    <span th:text="${registerfacility.name}">registerfacility</span><br/>
                 </div>
             </div>
         </div>
 
         <div>
-            <h3 class="center">Full Name</h3>
+            <h3 class="center">Facility's Name</h3>
             <input type="text"; class="center" th:field="*{name}"/>
             <span class="validationError"
                 th:if="${#fields.hasErrors('name')}"
@@ -49,10 +49,6 @@
     </form>
     <div class="footer">
         <div class="center-me">
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p style="text-align:center;">Luis Rosales</p><br/>

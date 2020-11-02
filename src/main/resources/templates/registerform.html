@@ -10,10 +10,10 @@
     <link rel="stylesheet", th:href="@{styles.css}"/>
 </head>
 <body>
-<form method="post" th:action="@{/requests}" th:object="${order}">
+<form method="post" th:action="@{/orders}" th:object="${order}">
     <h1>Submit your health care facility(ies)</h1>
     <img th:src="@{/images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
-    <a th:href="@{/requestinfo}" id="another">Register another facility</a><br/>
+    <a th:href="@{/registerfacility}" id="another">Register another facility</a><br/>
 
     <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
