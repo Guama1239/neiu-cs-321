@@ -12,6 +12,9 @@ div.ingredient-group {
     width: 50%;
 }
 
+.nav {
+    text-align: center;
+}
 .grid:after {
     content: "";
     display: table;

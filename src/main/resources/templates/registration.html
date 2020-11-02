@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Clinic</title>
+    <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/hospital_1f3e5.png">
+    <link rel="stylesheet" th:href="@{/stylesri.css}">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+    <h1>Register for Happy Clinic</h1>
+    <h1>🏥</h1>
+    <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
+    <br/>
+    <form method="post" class="center" th:action="@{/register}" th:object="${registrationForm}">
+
+        <label for="username">Username: </label>
+        <input type="text" th:name="username" th:value="*{username}" id="username"/>
+        <span class="validationError" th:if="${#fields.hasErrors('username')}"
+            th:errors="*{username}">Username Error</span><br/><br/>
+
+        <label for="password">Password: </label>
+        <input type="password" th:name="password" id="password"/>
+        <span class="validationError" th:if="${#fields.hasErrors('password')}"
+              th:errors="*{password}">Name Error</span><br/><br/>
+
+        <label for="fullName">Full name: </label>
+        <input type="text" th:name="fullName" id="fullName" th:value="*{fullName}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('fullName')}"
+              th:errors="*{fullName}">Name Error</span><br/><br/>
+
+        <label for="street">Street: </label>
+        <input type="text" th:name="street" id="street" th:value="*{street}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('street')}"
+              th:errors="*{street}">Name Error</span><br/><br/>
+
+        <label for="city">City: </label>
+        <input type="text" th:name="city" id="city" th:value="*{city}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('city')}"
+              th:errors="*{city}">Name Error</span><br/><br/>
+
+        <label for="state">State: </label>
+        <input type="text" th:name="state" id="state" th:value="*{state}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('state')}"
+              th:errors="*{state}">Name Error</span><br/><br/>
+
+        <label for="zip">Zip: </label>
+        <input type="text" th:name="zip" id="zip" th:value="*{zip}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('zip')}"
+              th:errors="*{zip}">Name Error</span><br/><br/>
+
+        <label for="phone">Phone: </label>
+        <input type="text" placeholder="XXX-XXX-XXXX" th:name="phone" id="phone" th:value="*{phone}"/>
+        <span class="validationError" th:if="${#fields.hasErrors('phone')}"
+              th:errors="*{phone}">Name Error</span><br/><br/>
+
+        <input type="submit" value="Register"/><br/>
+
+    </form>
+</body>
+</html>

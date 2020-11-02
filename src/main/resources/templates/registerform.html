@@ -5,14 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Happy Clinic</title>
-<!--    <link rel="stylesheet", th:href="@{/styles.css}">-->
-    <link rel="stylesheet", th:href="@{stylesri.css}"/>
-    <link rel="stylesheet", th:href="@{styles.css}"/>
+    <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/hospital_1f3e5.png">
+    <link rel="stylesheet" href="/stylesri.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<form method="post" th:action="@{/orders}" th:object="${order}">
     <h1>Submit your health care facility(ies)</h1>
+    <h1>🏥</h1>
     <img th:src="@{/images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
+    <hr/>
+    <div style="clear: both;"></div>
+    <form method="post" class="center" th:action="@{/orders}" th:object="${order}">
     <a th:href="@{/registerfacility}" id="another">Register another facility</a><br/>
 
     <div th:if="${#fields.hasErrors()}">
@@ -24,35 +27,35 @@
     <h3>Please type your information </h3>
 
     <label for="name">Name: </label>
-    <input type="text" th:field="*{name}"/>
+    <input type="text" th:name="name" th:value="${fullName}" id="name"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('name')}"
           th:errors="*{name}">Name Error</span>
     <br/><br/>
 
     <label for="street">Street: </label>
-    <input type="text" th:field="*{street}"/>
+    <input type="text" th:name="street" th:value="${street}" id="street"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('street')}"
           th:errors="*{street}">Name Error</span>
     <br/><br/>
 
     <label for="city">City: </label>
-    <input type="text" th:field="*{city}"/>
+    <input type="text" th:name="city" th:value="${city}" id="city"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('city')}"
           th:errors="*{city}">Name Error</span>
     <br/><br/>
 
     <label for="state">State: </label>
-    <input type="text" th:field="*{state}"/>
+    <input type="text" th:name="state" th:value="${state}" id="state"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('state')}"
           th:errors="*{state}">Name Error</span>
     <br/><br/>
 
     <label for="zip">Zip code: </label>
-    <input type="text" th:field="*{zip}"/>
+    <input type="text" th:zip="zip" th:value="${zip}" id="zip"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('zip')}"
           th:errors="*{zip}">Name Error</span>
@@ -60,21 +63,21 @@
 
    <!-- <h3>Here's how I'll pay...</h3>
     <label for="ccNumber">Credit Card #: </label>
-    <input type="text" th:field="*{ccNumber}"/>
+    <input type="text" th:field="*{ccNumber}" id="ccNumber"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('ccNumber')}"
           th:errors="*{ccNumber}">Name Error</span>
     <br/><br/>
 
     <label for="ccExpiration">Expiration: </label>
-    <input type="text" th:field="*{ccExpiration}"/>
+    <input type="text" th:field="*{ccExpiration}" id="ccExpiration"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('ccExpiration')}"
           th:errors="*{ccExpiration}">Name Error</span>
     <br/><br/>
 
     <label for="ccCVV">CVV: </label>
-    <input type="text" th:field="*{ccCVV}"/>
+    <input type="text" th:field="*{ccCVV}" id="ccCVV"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('ccCVV')}"
           th:errors="*{ccCVV}">Name Error</span>
@@ -83,5 +86,6 @@
     <input type="submit" value="Submit order"/>
 
 </form>
+    <p class="center"><a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>

@@ -1,10 +1,12 @@
-/*delete from Facility_Order_Facilities;
+delete from Facility_Order_Facilities;
 delete from Facility_Services;
 delete from Facility;
-delete from Facility_Order;*/
+delete from Facility_Order;
 
 
 delete from Service;
+-- delete from User;
+
 insert into Service(id, name, type)
 values ('AmbSurServ', 'Ambulatory surgical services', 'FACILITY_TYPE');
 insert into Service(id, name, type)

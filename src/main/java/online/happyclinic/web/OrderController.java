@@ -2,7 +2,9 @@ package online.happyclinic.web;
 
 import lombok.extern.slf4j.Slf4j;
 import online.happyclinic.Order;
+import online.happyclinic.User;
 import online.happyclinic.data.OrderRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -25,22 +27,32 @@ public class OrderController {
     }
 
     @GetMapping("/current")
-    public String requestForm() {
+    public String requestForm(Model model, @AuthenticationPrincipal User user) {
+        addUserInfoToModel(model, user);
         return "registerform";
+    }
+
+    private void addUserInfoToModel(Model model, User user) {
+        model.addAttribute("fullName", user.getFullName());
+        model.addAttribute("street", user.getStreet());
+        model.addAttribute("city", user.getCity());
+        model.addAttribute("state", user.getState());
+        model.addAttribute("zip", user.getZip());
     }
 
     @ModelAttribute
     public void addAttributes(Model model) { model.addAttribute("order", new Order()); }
 
     @PostMapping
-    public String processOrder(@Valid @ModelAttribute("order")Order order, Errors errors, SessionStatus sessionStatus, Model model) {
+    public String processOrder(@Valid @ModelAttribute("order")Order order, Errors errors, SessionStatus sessionStatus, Model model,
+                               @AuthenticationPrincipal User user) {
         if (errors.hasErrors())
             return "registerform";
 
+        order.setUser(user);
         orderRepo.save(order);
         log.info("Order submitted" + order);
         sessionStatus.setComplete();
-        //model.addAttribute("title", "Thank you for your submission");
-        return "redirect:/";  //"home"; // I am sorry, I could not find out in the docs how to send this message "redirect/:"
+        return "redirect:/";
     }
 }

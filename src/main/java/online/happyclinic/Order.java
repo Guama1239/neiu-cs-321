@@ -42,6 +42,9 @@ public class Order implements Serializable {
     @ManyToMany(targetEntity = Facility.class)
     private List<Facility> facilities = new ArrayList<>();
 
+    @ManyToOne
+    private User user;
+
     public void addDesign(Facility facility) {this.facilities.add(facility);}
 
     @PrePersist

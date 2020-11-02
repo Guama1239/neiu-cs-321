@@ -53,7 +53,6 @@ public class DesignFacilityController {
     @ModelAttribute
     public void addAttributes(Model model) {
         List<Service> services = (List<Service>) serviceRepo.findAll();
-        //List<RequestType> services = createregisterfacilityList();
         Type[] types = Service.Type.values();
         for (Type type: types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(services, type));
