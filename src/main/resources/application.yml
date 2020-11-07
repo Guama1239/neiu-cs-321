@@ -1,0 +1,23 @@
+#logging.file.name=logs/app.log
+#logging.pattern.file=%d %p %c{1.} [%t] %m%n
+#logging.pattern.console=%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+
+---
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:file:C:/Users/guama/OneDrive - neiu.edu/Documents/Fall_2020/CS_321/code/neiu-cs-321/dbdata
+    username: admin
+    password:
+    driver: org.h2.Driver
+
+server:
+  port: 9090
+

@@ -33,10 +33,15 @@ public class PrimaryTableController {
     public void addUser(Model model, @AuthenticationPrincipal User user){
         String username = user.getUsername();
         model.addAttribute("username", username);
+        List <Order> orders = orderRepo.findAllByUser(user);
+        model.addAttribute("orders", orders);
+        model.addAttribute("username", username);
     }
 
-    @ModelAttribute("orders")
-    public List<Order> orders(){return orderRepo.findAll();}
+//    @ModelAttribute("orders")
+//    public List<Order> orders(User user){
+//        String username = user.getUsername();
+//        return orderRepo.findAllByUser(username);}
 
 
 }

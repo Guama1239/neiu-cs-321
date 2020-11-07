@@ -17,7 +17,7 @@
 <h1>🏥</h1>
 <img th:src="@{/images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
 <div class="center" th:each="Order: ${orders}">
-
+<!--    <span th:text="${#authentication.getprincipal().get}"></span>-->
     <b th:text="'|| Id: ' + ${Order.id}"> Id </b>
     <b th:text="'|| name: ' + ${Order.name}"> name </b>
     <!--<b th:text="'|| city: ' + ${Order.city}"> city </b>

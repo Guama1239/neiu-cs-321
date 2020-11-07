@@ -36,4 +36,7 @@ public class Facility {
         this.createdAt = LocalDateTime.now();
     }
 
+   /* @ManyToOne
+    private User user;
+*/
 }

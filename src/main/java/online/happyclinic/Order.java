@@ -45,7 +45,8 @@ public class Order implements Serializable {
     @ManyToOne
     private User user;
 
-    public void addDesign(Facility facility) {this.facilities.add(facility);}
+    public void addDesign(Facility facility) {
+        this.facilities.add(facility);}
 
     @PrePersist
     void placedAt() {

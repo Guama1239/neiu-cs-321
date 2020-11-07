@@ -1,3 +1,4 @@
+/*
 delete from Facility_Order_Facilities;
 delete from Facility_Services;
 delete from Facility;
@@ -39,4 +40,5 @@ insert into Service(id, name, type)
 values ('UrgentCare', 'Urgent care', 'MEDICAL_SERVICES');
 insert into Service(id, name, type)
 values ('AmbulatoryCare', 'Ambulatory care', 'MEDICAL_SERVICES');
+*/
 

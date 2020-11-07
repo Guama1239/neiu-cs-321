@@ -40,8 +40,7 @@ public class OrderController {
         model.addAttribute("zip", user.getZip());
     }
 
-    @ModelAttribute
-    public void addAttributes(Model model) { model.addAttribute("order", new Order()); }
+
 
     @PostMapping
     public String processOrder(@Valid @ModelAttribute("order")Order order, Errors errors, SessionStatus sessionStatus, Model model,
