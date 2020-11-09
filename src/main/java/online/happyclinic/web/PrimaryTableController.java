@@ -5,6 +5,9 @@ import online.happyclinic.Order;
 import online.happyclinic.User;
 import online.happyclinic.data.OrderRepository;
 import online.happyclinic.data.ServiceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +24,12 @@ import java.util.List;
 public class PrimaryTableController {
     private final OrderRepository orderRepo;
 
-    public PrimaryTableController(OrderRepository orderRepo) {
+    @Autowired
+    private OrderProperties orderProperties;
+
+    public PrimaryTableController(OrderRepository orderRepo, OrderProperties orderProperties) {
         this.orderRepo = orderRepo;
+        this.orderProperties = orderProperties;
     }
 
     @GetMapping
@@ -32,13 +39,14 @@ public class PrimaryTableController {
     @ModelAttribute
     public void addUser(Model model, @AuthenticationPrincipal User user){
         String username = user.getUsername();
+        Pageable pageable = PageRequest.of(0, orderProperties.getPageSize());
         model.addAttribute("username", username);
-        List <Order> orders = orderRepo.findAllByUser(user);
+        List <Order> orders = orderRepo.findAllByUser(user, pageable);
         model.addAttribute("orders", orders);
         model.addAttribute("username", username);
     }
 
-//    @ModelAttribute("orders")
+//    @ModelAttribute("orders") todo: understand why I needed this in the same method above addUser
 //    public List<Order> orders(User user){
 //        String username = user.getUsername();
 //        return orderRepo.findAllByUser(username);}

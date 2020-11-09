@@ -21,3 +21,7 @@ spring:
 server:
   port: 9090
 
+facility:
+  orders:
+    page-size: 5
+

@@ -16,16 +16,24 @@
 <h1>Orders Report</h1>
 <h1>🏥</h1>
 <img th:src="@{/images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
-<div class="center" th:each="Order: ${orders}">
-<!--    <span th:text="${#authentication.getprincipal().get}"></span>-->
-    <b th:text="'|| Id: ' + ${Order.id}"> Id </b>
+<div class="order" th:each="Order: ${orders}">
+    <b th:text="'Id:   ' + ${Order.id}"> Id </b>
     <b th:text="'|| name: ' + ${Order.name}"> name </b>
     <!--<b th:text="'|| city: ' + ${Order.city}"> city </b>
     <b th:text="'|| state: ' + ${Order.state}">state</b>-->
-    <b th:text="'|| zip: ' + ${Order.zip}">zip</b>
-    <b th:text="'|| placedAt: ' + ${Order.placedAt}"> placedAt </b>
-
+    <!--<b th:text="'|| zip: ' + ${Order.zip}">zip</b>-->
+    <b th:text="'|| placedAt: ' + ${Order.placedAt.getMonth()} + ' '
+        + ${Order.placedAt.getDayOfMonth()} + ' ' + ${Order.placedAt.getYear()}"> placedAt </b>
+    <div th:each="facility: ${Order.facilities}">
+        <b th:text="'-Facility name: ' + ${facility.name} + '.'"> Facility Name </b>
+        <br/><b>Type of service(s)</b>
+        <div th:each="service: ${facility.services}">
+            <b th:text="'-- ' + ${service.name} + '.'">Service name</b>
+        </div>
+    </div>
 </div>
+
+
 <p style="text-align: center"><a th:href="@{/logout}">Logout</a></p>
 <div class="footer">
     <div class="center-me">
