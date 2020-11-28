@@ -6,29 +6,94 @@
     <meta charset="UTF-8">
     <title>Happy Clinic</title>
     <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/hospital_1f3e5.png">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/stylesri.css}">
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-    <h1>Login to Happy Clinic</h1>
-    <h1>🏥</h1>
-    <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
-    <div th:if="${error}">
-        Unable to login, Check your username and password
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <span class="navbar-brand">Happy Clinic</span>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item " th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
+                    th:if="${#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item" th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
+                    th:if="${#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item" th:classappend="${#request.getServletPath() == '/registerfacility' ? 'active' : ''}"
+                    th:if="${!#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/registerfacility}">Register Facility</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <h1 class="col-12 text-center mt-5">Login to Happy Clinic</h1>
+            <h1>🏥</h1>
+        </div>
+        <div class="row justify-content-center mt-2 mb-2">
+            <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px"/>
+        </div>
     </div>
 
-    <p style="text-align: center;">New here? Click <a th:href="@{/register}">here</a> to register. </p>
-    <br/><br/>
 
-    <form class="center" method="post" th:action="@{/login}" id="loginForm">
-        <label style="text-align: center;" for="username">Username: </label>
-        <input style="text-align: center;" type="text" th:name="username" id="username"/><br/><br/>
 
-        <label style="text-align: center;" for="password">Password: </label>
-        <input style="text-align: center;" type="text" th:name="password" id="password"/><br/><br/>
+    <form class="container-fluid" method="post" th:action="@{/login}" id="loginForm">
 
-        <input style="text-align: center;" type="submit" value="Login"/>
+        <div th:if="${param.error}"
+             class="justify-content-center text-danger row col-12 pt-3 pl-5">
+            Unable to login. Check your username and password.</div>
 
+        <a th:if="${param.error}" th:href="@{/register}"
+           class="justify-content-center alert-link row col-12 pl-5">
+            Or register an account.</a>
+
+        <div class="row form-group justify-content-center">
+            <label class="col-form-label col-2 text-right font-weight-bold" for="username">Username: </label>
+            <input class="form-control col-5 col-md-2" type="text" th:name="username" id="username" placeholder="Required"/><br><br>
+        </div>
+
+        <div class="row form-group justify-content-center">
+            <label class="col-form-label col-2 text-right font-weight-bold" for="password">Password: </label>
+            <input class="form-control col-5 col-md-2" type="password" th:name="password" id="password" placeholder="Required"/><br><br>
+        </div>
+
+        <div class="row form-group justify-content-center">
+            <span class="col-6 col-md-3"></span>
+            <input class="col-1 form-control btn-info" type="submit" value="Login"/>
+        </div>
     </form>
+
+    <div class="footer">
+        <div class="center-me">
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p style="text-align:center;">Luis Rosales</p><br/>
+            <p style="text-align:center;">
+                Copyright &#169; 2020 Luis Rosales CS 321-1</p>
+            <p style="text-align:center;"><a href="http://validator.w3.org/check?uri=referer"><img
+                    src="http://www.w3.org/Icons/valid-xhtml10" style="width: 100px; height: 40px;" alt="Valid XHTML 1.0 Transitional"/></a>
+            </p>
+        </div>
+    </div>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
 </body>
 </html>

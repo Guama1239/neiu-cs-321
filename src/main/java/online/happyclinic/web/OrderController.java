@@ -52,6 +52,6 @@ public class OrderController {
         orderRepo.save(order);
         log.info("Order submitted" + order);
         sessionStatus.setComplete();
-        return "redirect:/";
+        return "redirect:/primarytableview";
     }
 }

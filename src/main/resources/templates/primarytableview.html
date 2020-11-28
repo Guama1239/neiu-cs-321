@@ -6,23 +6,64 @@
     <meta charset="UTF-8">
     <title>Primary table view Orders</title>
     <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/hospital_1f3e5.png">
-    <link rel="stylesheet", th:href="@{stylesri.css}"/>
-    <link rel="stylesheet", th:href="@{styles.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{stylesri.css}"/>
+    <link rel="stylesheet" th:href="@{styles.css}"/>
 </head>
 <body>
-<br/><br/>
-<h3 style="text-align: center" th:text="${'Hi, ' + username}">Hello, username</h3>
-<p style="text-align: center"><a th:href="@{/registerfacility}">Add a Facility</a></p>
-<h1>Orders Report</h1>
-<h1>🏥</h1>
-<img th:src="@{/images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
-<div class="order" th:each="Order: ${orders}">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <span class="navbar-brand">Happy Clinic</span>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}"
+                    th:if="${#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item " th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
+                    th:if="${#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item" th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
+                    th:if="${#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item" th:classappend="${#request.getServletPath() == '/registerfacility' ? 'active' : ''}"
+                    th:if="${!#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/registerfacility}">Add a Facility</a>
+                </li>
+                <li class="nav-item" th:classappend="${#request.getServletPath() == '/logout' ? 'active' : ''}"
+                    th:if="${!#authentication.getName().equals('anonymousUser')}" >
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <h3 class="col-12 text-center mt-5" th:text="${'Hi, ' + username}">Hello, username</h3>
+            <h1 class="col-12 text-center">Orders Report</h1>
+            <h1>🏥</h1>
+        </div>
+        <div class="row justify-content-center mt-2 mb-2">
+            <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px;" class="center"/>
+        </div>
+<!--            <div class="row justify-content-center">-->
+<!--                <p class="nav-text-size"><a th:href="@{/registerfacility}">Add a Facility</a></p>-->
+<!--            </div>-->
+    </div>
+
+<div class="order text-center" th:each="Order: ${orders}">
     <b th:text="'Id:   ' + ${Order.id}"> Id </b>
     <b th:text="'|| name: ' + ${Order.name}"> name </b>
-    <!--<b th:text="'|| city: ' + ${Order.city}"> city </b>
-    <b th:text="'|| state: ' + ${Order.state}">state</b>-->
-    <!--<b th:text="'|| zip: ' + ${Order.zip}">zip</b>-->
-    <b th:text="'|| placedAt: ' + ${Order.placedAt.getMonth()} + ' '
+    <b th:text="'|| placed on: ' + ${Order.placedAt.getMonth()} + ' '
         + ${Order.placedAt.getDayOfMonth()} + ' ' + ${Order.placedAt.getYear()}"> placedAt </b>
     <div th:each="facility: ${Order.facilities}">
         <b th:text="'-Facility name: ' + ${facility.name} + '.'"> Facility Name </b>
@@ -33,8 +74,6 @@
     </div>
 </div>
 
-
-<p style="text-align: center"><a th:href="@{/logout}">Logout</a></p>
 <div class="footer">
     <div class="center-me">
         <p>&nbsp;</p>
@@ -47,5 +86,8 @@
         </p>
     </div>
 </div>
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
 </body>
 </html>

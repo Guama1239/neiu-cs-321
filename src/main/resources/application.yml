@@ -19,7 +19,7 @@ spring:
     driver: org.h2.Driver
 
 server:
-  port: 9090
+  port: 8080
 
 facility:
   orders:
