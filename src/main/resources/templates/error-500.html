@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Happy Clinic - 500 Server Problemo </title>
+    <div th:replace="fragments/base :: headContent"></div>
+    <link  th:href="@{/error-500.css}" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragments/base :: navigation"></div>
+    <section class="container centered">
+        <h1 class="text-center mt-5">Happy Clinic</h1>
+        <div th:replace="fragments/base :: appImage"></div>
+        <h1 class="mt-5">500 Server Error</h1>
+        <div class="container" style="text-align: center">
+            <span class="message" id="js-whoops"></span> <span class="message" id="js-appears"></span> <span class="message" id="js-error"></span> <span class="message" id="js-apology"></span>
+            <div><span class="hidden" id="js-hidden">Message Here</span></div>
+        </div>
+    </section>
+    <div th:replace="fragments/base :: footer"></div>
+    <div th:insert="fragments/base :: scripts"></div>
+</body>
+</html>

@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/base :: headContent">
-    <title>Happy Clinic</title>
-</head>
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/base :: headContent"></head>
 <body>
     <div th:replace="fragments/base :: navigation"></div>
     <div class="container-fluid mt-5">
@@ -17,7 +15,11 @@
         <div th:replace="fragments/base :: appImage"></div>
     </div>
 
-
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <h2>Oops! Something went wrong! We're working on it...Please try again</h2>
+        </div>
+    </div>
 
 
     <div th:replace="fragments/base :: footer"></div>

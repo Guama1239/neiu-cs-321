@@ -2,53 +2,15 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Happy Clinic</title>
-    <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/microsoft/209/hospital_1f3e5.png">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/stylesri.css}">
-    <link rel="stylesheet" th:href="@{/styles.css}">
-</head>
+<head th:insert="fragments/base :: headContent"></head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <span class="navbar-brand">Happy Clinic</span>
-        <button class="navbar-toggler" type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item" th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/}">Home</a>
-                </li>
-                <li class="nav-item " th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
-                    th:if="${#authentication.getName().equals('anonymousUser')}" >
-                    <a class="nav-link" th:href="@{/login}">Login</a>
-                </li>
-                <li class="nav-item" th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
-                    th:if="${#authentication.getName().equals('anonymousUser')}" >
-                    <a class="nav-link" th:href="@{/register}">Register</a>
-                </li>
-                <li class="nav-item" th:classappend="${#request.getServletPath() == '/registerfacility' ? 'active' : ''}"
-                    th:if="${!#authentication.getName().equals('anonymousUser')}" >
-                    <a class="nav-link" th:href="@{/registerfacility}">Register Facility</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div th:replace="fragments/base :: navigation"></div>
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
             <h1 class="col-12 text-center mt-5">Login to Happy Clinic</h1>
             <h1>🏥</h1>
         </div>
-        <div class="row justify-content-center mt-2 mb-2">
-            <img th:src="@{images/austin_distel_unsplash.jpg}" style="height: 300px; width: 450px"/>
-        </div>
+        <div th:replace="fragments/base :: appImage"></div>
     </div>
 
 
@@ -79,21 +41,7 @@
         </div>
     </form>
 
-    <div class="footer">
-        <div class="center-me">
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p style="text-align:center;">Luis Rosales</p><br/>
-            <p style="text-align:center;">
-                Copyright &#169; 2020 Luis Rosales CS 321-1</p>
-            <p style="text-align:center;"><a href="http://validator.w3.org/check?uri=referer"><img
-                    src="http://www.w3.org/Icons/valid-xhtml10" style="width: 100px; height: 40px;" alt="Valid XHTML 1.0 Transitional"/></a>
-            </p>
-        </div>
-    </div>
-    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+    <div th:replace="fragments/base :: footer"></div>
+    <div th:insert="fragments/base :: scripts"></div>
 </body>
 </html>
