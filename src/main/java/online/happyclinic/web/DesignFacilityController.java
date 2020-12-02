@@ -57,7 +57,6 @@ public class DesignFacilityController {
         for (Type type: types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(services, type));
         }
-    //        model.addAttribute("design", new Request());
     }
 
     @ModelAttribute(name = "facility")

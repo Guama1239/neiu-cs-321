@@ -2,7 +2,92 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/base :: headContent"></head>
+<head th:insert="fragments/base :: headContent">
+    <style>
+        .container-one {
+            max-width: 640px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #FFEFBA;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFFFFF, #FFEFBA);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        ul.ks-cboxtags {
+            list-style: none;
+            padding: 20px;
+        }
+        ul.ks-cboxtags li{
+            display: inline;
+        }
+        ul.ks-cboxtags li label{
+            display: inline-block;
+            background-color: rgba(255, 255, 255, .9);
+            border: 2px solid rgba(139, 139, 139, .3);
+            color: #adadad;
+            border-radius: 25px;
+            white-space: nowrap;
+            margin: 3px 0px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: all .2s;
+        }
+
+        ul.ks-cboxtags li label {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        ul.ks-cboxtags li label::before {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 12px;
+            padding: 2px 6px 2px 2px;
+            content: "\f067";
+            transition: transform .3s ease-in-out;
+        }
+
+        ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+            content: "\f00c";
+            transform: rotate(-360deg);
+            transition: transform .3s ease-in-out;
+        }
+
+        ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+            border: 2px solid #1bdbf8;
+            background-color: #12bbd4;
+            color: #fff;
+            transition: all .2s;
+        }
+
+        ul.ks-cboxtags li input[type="checkbox"] {
+            display: absolute;
+        }
+        ul.ks-cboxtags li input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+        }
+        ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+            border: 2px solid #e9a1ff;
+        }
+    </style>
+</head>
 
 <body>
     <div th:replace="fragments/base :: navigation"></div>
@@ -12,47 +97,87 @@
             <h1>🏥</h1>
         </div>
         <div th:replace="fragments/base :: appImage"></div>
+    </div><br/>
+    <div class="justify-content-center container">
+        <div th:insert="fragments/baseone :: container-onecss"></div>
+        <form method="post" class="container-one" th:object="${facility}">
+            <span class="validationError"
+            th:if="${#fields.hasErrors('services')}"
+                            th:errors="*{services}">services Error
+            </span>
+            <div class="justify-content-center" id="Facility_Type">
+                <h3 style="text-align: center">Select type of facility</h3>
+                     <ul class="ks-cboxtags form-check form-check-inline align-items-center" th:each="service: ${facility_type}">
+                           <li><input class="form-check-input" name="services" type="checkbox" th:id="${service.id}" th:value="${service.id}"/>
+                            <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label>
+                            </li>
+                     </ul>
+            </div>
+
+            <div id="Medical_Services">
+                 <h3 style="text-align: center">Select medical services</h3>
+                      <ul class="ks-cboxtags form-check form-check-inline align-items-center" th:each="service: ${medical_services}">
+                            <li><input class="form-check-input" name="services" type="checkbox" th:id="${service.id}" th:value="${service.id}"/>
+                            <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label>
+                            </li>
+                      </ul>
+            </div>
+
+            <div class="row form-group justify-content-center">
+                <label class="col-form-label col-2 text-right font-weight-bold">Facility's Name</label>
+                <input  class="form-control col-5 col-md-2" type="text" th:field="*{name}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">Name Error
+                </span>
+                <br/><br/>
+            </div>
+            <div class="row form-group justify-content-center">
+                <span class="col-6 col-md-3"></span>
+                <input class="col-1 form-control btn-info" type="submit" value="Submit"/><br/>
+            </div>
+        </form>
     </div>
 
-    <form method="post" class="container" th:object="${facility}">
-        <span class="validationError"
-            th:if="${#fields.hasErrors('services')}"
-            th:errors="*{services}">services Error</span>
-        <div class="grid">
-            <div class="ingredient-group" id="Facility_Type">
-                <h3>Select type of facility</h3>
-                <div class="row form-group justify-content-lg-start" th:each="registerfacility : ${facility_type}">
-                    <input class="form-check-input" name="services" type="checkbox" th:value="${registerfacility.id}"/>
-                    <span th:text="${registerfacility.name}">registerfacility</span><br/>
-                </div>
-            </div>
 
-            <div class="ingredient-group" id="Medical_Services">
-                <h3>Select medical services</h3>
-                <div class="row form-group justify-content-lg-start" th:each="registerfacility : ${medical_services}">
-                    <input class="form-check-input" name="services" type="checkbox" th:value="${registerfacility.id}"/>
-                    <span th:text="${registerfacility.name}">registerfacility</span><br/>
-                </div>
-            </div>
-        </div>
+<!--    <form method="post" class="container" th:object="${facility}">-->
+<!--        <span class="validationError"-->
+<!--            th:if="${#fields.hasErrors('services')}"-->
+<!--            th:errors="*{services}">services Error</span>-->
+<!--        <div class="grid">-->
+<!--            <div class="ingredient-group" id="Facility_Type">-->
+<!--                <h3>Select type of facility</h3>-->
+<!--                <div class="row form-group justify-content-lg-start" th:each="service: ${facility_type}">-->
+<!--                    <input class="form-check-input" name="services" type="checkbox" th:value="${service.id}"/>-->
+<!--                    <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label><br/>-->
+<!--                </div>-->
+<!--            </div>-->
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold">Facility's Name</label>
-            <input  class="form-control col-5 col-md-2" type="text" th:field="*{name}"/>
-            <span class="validationError"
-                th:if="${#fields.hasErrors('name')}"
-                th:errors="*{name}">Name Error</span>
-            <br/><br/>
-        </div>
-        <div class="row form-group justify-content-center">
-            <span class="col-6 col-md-3"></span>
-            <input class="col-1 form-control btn-info" type="submit" value="Submit"/><br/>
-        </div>
-<!--            <button class="row form-group justify-content-center">Submit your request</button>-->
+<!--            <div class="ingredient-group" id="Medical_Services">-->
+<!--                <h3>Select medical services</h3>-->
+<!--                <div class="row form-group justify-content-lg-start" th:each="service: ${medical_services}">-->
+<!--                    <input class="form-check-input" name="services" type="checkbox" th:value="${service.id}"/>-->
+<!--                    <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label><br/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-    </form>
+<!--        <div class="row form-group justify-content-center">-->
+<!--            <label class="col-form-label col-2 text-right font-weight-bold">Facility's Name</label>-->
+<!--            <input  class="form-control col-5 col-md-2" type="text" th:field="*{name}"/>-->
+<!--            <span class="validationError"-->
+<!--                th:if="${#fields.hasErrors('name')}"-->
+<!--                th:errors="*{name}">Name Error</span>-->
+<!--            <br/><br/>-->
+<!--        </div>-->
+<!--        <div class="row form-group justify-content-center">-->
+<!--            <span class="col-6 col-md-3"></span>-->
+<!--            <input class="col-1 form-control btn-info" type="submit" value="Submit"/><br/>-->
+<!--        </div>-->
+<!--    </form>-->
 
     <div th:replace="fragments/base :: footer"></div>
-    <div th:replace="fragments/base :: scripts"></div>
+<!--    <div th:replace="fragments/base :: scripts"></div>-->
 </body>
+<th:block th:insert="fragments/base :: scripts"></th:block>
 </html>

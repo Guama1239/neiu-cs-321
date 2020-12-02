@@ -102,6 +102,7 @@
     </main>
 
     <div th:replace="fragments/base :: footer"></div>
-    <div th:insert="fragments/base :: scripts"></div>
+<!--    <div th:insert="fragments/base :: scripts"></div>-->
 </body>
+<th:block th:insert="fragments/base :: scripts"></th:block>
 </html>

@@ -46,10 +46,6 @@ public class PrimaryTableController {
         model.addAttribute("username", username);
     }
 
-//    @ModelAttribute("orders") todo: understand why I needed this in the same method above addUser
-//    public List<Order> orders(User user){
-//        String username = user.getUsername();
-//        return orderRepo.findAllByUser(username);}
 
 
 }

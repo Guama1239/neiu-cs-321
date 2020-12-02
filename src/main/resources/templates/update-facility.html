@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/base :: headContent"></head>
+<body>
+    <div th:replace="fragments/base :: navigation"></div>
+
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <h1 class="col-12 text-center mt-5">Update Facility's Details</h1>
+            <h1>🏥</h1>
+        </div>
+        <div th:replace="fragments/base :: appImage"></div>
+    </div>
+
+    <form method="post" th:action="@{/modify/update/{facilityId}(facilityId=${facility.id})}" class="container" th:object="${facility}">
+        <span class="validationError"
+              th:if="${#fields.hasErrors('services')}"
+              th:errors="*{services}">services Error</span>
+        <div class="grid">
+            <div class="ingredient-group" id="Facility_Type">
+                <h3>Select type of facility</h3>
+                <div class="row form-group justify-content-lg-start" th:each="service: ${facility_type}">
+                    <input class="form-check-input" name="services" type="checkbox" th:value="${service.id}"
+                           th:checked="${#lists.contains(serviceIds, service.id)}"/>
+                    <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label><br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="Medical_Services">
+                <h3>Select medical services</h3>
+                <div class="row form-group justify-content-lg-start" th:each="service: ${medical_services}">
+                    <input class="form-check-input" name="services" type="checkbox" th:value="${service.id}"
+                           th:checked="${#lists.contains(serviceIds, service.id)}"/>
+                    <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label><br/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group justify-content-center">
+            <label class="col-form-label col-2 text-right font-weight-bold">Facility's Name</label>
+            <input  class="form-control col-5 col-md-2" type="text" th:field="*{name}"/>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">Name Error</span>
+            <br/><br/>
+        </div>
+        <div class="row form-group justify-content-center">
+            <a th:href="@{/primarytableview}" class="btn btn-outline-dark btn-lg col-auto form-group mr-2">Cancel</a>
+            <span class="col-6 col-md-3"></span>
+            <input class="btn btn-outline-dark btn-lg col-auto form-group" type="submit" value="Update"/><br/>
+        </div>
+    </form>
+
+</body>
+<div th:replace="fragments/base :: footer"></div>
+<th:block th:insert="fragments/base :: scripts"></th:block>
+</html>

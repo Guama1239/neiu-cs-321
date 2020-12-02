@@ -27,7 +27,7 @@ server:
 
 facility:
   orders:
-    page-size: 5
+    page-size: 15
 
 
 
