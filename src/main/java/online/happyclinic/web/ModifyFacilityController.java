@@ -39,6 +39,17 @@ public class ModifyFacilityController {
         return "update-facility";
     }
 
+    @GetMapping("/view/{facilityId}")
+    public String viewFacility(@PathVariable("facilityId") long id, Model model){
+        Facility facility = facilityRepo.findById(id).get();
+        model.addAttribute("serviceIds", getServicesIds(facility));
+        model.addAttribute("facility", facility);
+        addIngredientsToModel(model);
+        return "view-facility";
+    }
+
+
+
     @PostMapping("/update/{facilityId}")
     public String processUpdateFacility(@PathVariable("facilityId") long id, @Valid @ModelAttribute("facility") Facility facility, Errors errors){
         if (errors.hasErrors())
@@ -76,4 +87,29 @@ public class ModifyFacilityController {
                 .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());
     }
+
+
+    @GetMapping("/delete/{facilityId}")
+    public String updateFacilityToDelete(@PathVariable("facilityId") long id, Facility facility){
+        Facility newFacility = facilityRepo.findById(id).get();
+        newFacility.setServices(facility.getServices());
+        newFacility.setName(facility.getName());
+       // serviceRepo.deleteAll(List<Service>);
+        facilityRepo.delete(newFacility);
+        log.info("Processing changes.." + newFacility);
+        return "redirect:/primarytableview";
+    }
+
+//    @PostMapping
+//    public String processDeleteFacility(@PathVariable("facilityId") long id, @Valid @ModelAttribute("facility") Facility facility, Errors errors){
+//        if (errors.hasErrors())
+//            return "update-facility";
+
+//        Facility newFacility = facilityRepo.findById(id).get();
+//        newFacility.setServices(facility.getServices());
+//        newFacility.setName(facility.getName());
+//        facilityRepo.delete(newFacility);
+//        log.info("Processing changes.." + newFacility);
+//        return "redirect:/primarytableview";
+//    }
 }

@@ -5,4 +5,6 @@ import online.happyclinic.Facility;
 
 public interface FacilityRepository extends CrudRepository<Facility, Long> {
 
+    @Override
+    void deleteById(Long aLong);
 }

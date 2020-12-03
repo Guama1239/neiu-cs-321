@@ -89,37 +89,37 @@
     </style>
 </head>
 <body>
-    <div th:replace="fragments/base :: navigation"></div>
-    <div class="container-fluid mt-5">
-        <div class="row justify-content-center">
-            <h1 class="col-12 text-center mt-5">Update Facility's Details</h1>
-            <h1>🏥</h1>
-        </div>
-        <div th:replace="fragments/base :: appImage"></div>
-    </div><br/>
-    <div class="justify-content-center container">
+<div th:replace="fragments/base :: navigation"></div>
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <h1 class="col-12 text-center mt-5">View Only Facility's Details</h1>
+        <h1>🏥</h1>
+    </div>
+    <div th:replace="fragments/base :: appImage"></div>
+</div><br/>
+<div class="justify-content-center container">
     <div th:insert="fragments/baseone :: container-onecss"></div>
-    <form method="post" th:action="@{/modify/update/{facilityId}(facilityId=${facility.id})}" class="container-one" th:object="${facility}">
+    <form class="container-one" th:object="${facility}">
         <span class="validationError"
               th:if="${#fields.hasErrors('services')}"
               th:errors="*{services}">services Error
         </span>
 
         <div class="justify-content-center" id="Facility_Type">
-            <h3 style="text-align: center">Update type of facility</h3>
+            <h3 style="text-align: center">View Only Type of facility</h3>
             <ul class="ks-cboxtags form-check form-check-inline align-items-center" th:each="service: ${facility_type}">
-                <li><input class="form-check-input" name="services" type="checkbox" th:id="${service.id}" th:value="${service.id}"
-                    th:checked="${#lists.contains(serviceIds, service.id)}"/>
+                <li><input class="form-check-input" name="services" type="checkbox" disabled="disabled" th:id="${service.id}" th:value="${service.id}"
+                           th:checked="${#lists.contains(serviceIds, service.id)}"/>
                     <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label>
                 </li>
             </ul>
         </div>
 
         <div id="Medical_Services">
-            <h3 style="text-align: center">Update medical services</h3>
+            <h3 style="text-align: center">View Only Medical Services</h3>
             <ul class="ks-cboxtags form-check form-check-inline align-items-center" th:each="service: ${medical_services}">
-                <li><input class="form-check-input" name="services" type="checkbox" th:id="${service.id}" th:value="${service.id}"
-                    th:checked="${#lists.contains(serviceIds, service.id)}"/>
+                <li><input class="form-check-input" name="services" type="checkbox" disabled="disabled" th:id="${service.id}" th:value="${service.id}"
+                           th:checked="${#lists.contains(serviceIds, service.id)}"/>
                     <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label>
                 </li>
             </ul>
@@ -128,20 +128,19 @@
 
         <div class="row form-group justify-content-center">
             <label class="col-form-label col-2 text-right font-weight-bold">Facility's Name</label>
-            <input  class="form-control col-5 col-md-2" type="text" th:field="*{name}"/>
+            <input  class="form-control col-5 col-md-2" type="text" th:field="*{name}" readonly/>
             <span class="validationError"
                   th:if="${#fields.hasErrors('name')}"
                   th:errors="*{name}">Name Error</span>
-            <br/><br/>
+            <b th:text="'Created at ' + ${facility.createdAt}">CREATED AT</b>
+
         </div>
         <div class="row form-group justify-content-center">
-            <a th:href="@{/primarytableview}" class="btn btn-outline-dark btn-lg col-auto form-group mr-2">Cancel</a>
-            <span class="col-6 col-md-3"></span>
-            <input class="btn btn-outline-dark btn-lg col-auto form-group" type="submit" value="Update"/><br/>
+            <a th:href="@{/primarytableview}" class="btn btn-outline-dark btn-lg col-auto form-group mr-2">Done</a>
         </div>
     </form>
-    </div>
-    <div th:replace="fragments/base :: footer"></div>
+</div>
+<div th:replace="fragments/base :: footer"></div>
 </body>
 
 <th:block th:insert="fragments/base :: scripts"></th:block>

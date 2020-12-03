@@ -102,8 +102,8 @@
         <div th:insert="fragments/baseone :: container-onecss"></div>
         <form method="post" class="container-one" th:object="${facility}">
             <span class="validationError"
-            th:if="${#fields.hasErrors('services')}"
-                            th:errors="*{services}">services Error
+                th:if="${#fields.hasErrors('services')}"
+                th:errors="*{services}">services Error
             </span>
             <div class="justify-content-center" id="Facility_Type">
                 <h3 style="text-align: center">Select type of facility</h3>
@@ -138,46 +138,7 @@
             </div>
         </form>
     </div>
-
-
-<!--    <form method="post" class="container" th:object="${facility}">-->
-<!--        <span class="validationError"-->
-<!--            th:if="${#fields.hasErrors('services')}"-->
-<!--            th:errors="*{services}">services Error</span>-->
-<!--        <div class="grid">-->
-<!--            <div class="ingredient-group" id="Facility_Type">-->
-<!--                <h3>Select type of facility</h3>-->
-<!--                <div class="row form-group justify-content-lg-start" th:each="service: ${facility_type}">-->
-<!--                    <input class="form-check-input" name="services" type="checkbox" th:value="${service.id}"/>-->
-<!--                    <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label><br/>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="ingredient-group" id="Medical_Services">-->
-<!--                <h3>Select medical services</h3>-->
-<!--                <div class="row form-group justify-content-lg-start" th:each="service: ${medical_services}">-->
-<!--                    <input class="form-check-input" name="services" type="checkbox" th:value="${service.id}"/>-->
-<!--                    <label class="form-check-label" th:for="${service.id}" th:text="${service.name}">SERVICE</label><br/>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="row form-group justify-content-center">-->
-<!--            <label class="col-form-label col-2 text-right font-weight-bold">Facility's Name</label>-->
-<!--            <input  class="form-control col-5 col-md-2" type="text" th:field="*{name}"/>-->
-<!--            <span class="validationError"-->
-<!--                th:if="${#fields.hasErrors('name')}"-->
-<!--                th:errors="*{name}">Name Error</span>-->
-<!--            <br/><br/>-->
-<!--        </div>-->
-<!--        <div class="row form-group justify-content-center">-->
-<!--            <span class="col-6 col-md-3"></span>-->
-<!--            <input class="col-1 form-control btn-info" type="submit" value="Submit"/><br/>-->
-<!--        </div>-->
-<!--    </form>-->
-
     <div th:replace="fragments/base :: footer"></div>
-<!--    <div th:replace="fragments/base :: scripts"></div>-->
 </body>
 <th:block th:insert="fragments/base :: scripts"></th:block>
 </html>

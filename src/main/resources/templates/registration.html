@@ -13,69 +13,70 @@
         <div th:replace="fragments/base :: appImage"></div>
     </div>
     <br/><br/>
-
-    <form method="post" class="container-fluid" th:action="@{/register}" th:object="${registrationForm}">
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="username">Username: </label>
-            <input class="form-control col-5 col-md-2" type="text" th:name="username" id="username" placeholder="Required" th:value="*{username}"/>
+<div class="container col-8">
+    <form method="post" class="container" th:action="@{/register}" th:object="${registrationForm}">
+        <div class="form-group">
+            <label for="username">Username: </label>
+            <input class="form-control" type="text" th:name="username" id="username" placeholder="Required" th:value="*{username}"/>
             <span class="validationError" th:if="${#fields.hasErrors('username')}"
                 th:errors="*{username}">Username Error</span><br/><br/>
         </div>
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="password">Password: </label>
-            <input class="form-control col-5 col-md-2" type="password" th:name="password" id="password" placeholder="Required" th:value="*{password}"/>
+        <div class="form-group">
+            <label for="password">Password: </label>
+            <input class="form-control" type="password" th:name="password" id="password" placeholder="Required" th:value="*{password}"/>
             <span class="validationError" th:if="${#fields.hasErrors('password')}"
                   th:errors="*{password}">Name Error</span><br/><br/>
         </div>
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="fullName">Full name: </label>
-            <input class="form-control col-5 col-md-2" type="text" th:name="fullName" id="fullName" placeholder="Required" th:value="*{fullName}"/>
+        <div class="form-group">
+            <label for="fullName">Full name: </label>
+            <input class="form-control" type="text" th:name="fullName" id="fullName" placeholder="Required" th:value="*{fullName}"/>
             <span class="validationError" th:if="${#fields.hasErrors('fullName')}"
                   th:errors="*{fullName}">Name Error</span><br/><br/>
         </div>
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="street">Street: </label>
-            <input class="form-control col-5 col-md-2" type="text" th:name="street" id="street" placeholder="Required" th:value="*{street}"/>
+        <div class="form-group">
+            <label for="street">Street: </label>
+            <input class="form-control" type="text" th:name="street" id="street" placeholder="Required" th:value="*{street}"/>
             <span class="validationError" th:if="${#fields.hasErrors('street')}"
                   th:errors="*{street}">Name Error</span><br/><br/>
         </div>
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="city">City: </label>
-            <input class="form-control col-5 col-md-2" type="text" th:name="city" id="city" placeholder="Required" th:value="*{city}"/>
+        <div class="form-group">
+            <label for="city">City: </label>
+            <input class="form-control" type="text" th:name="city" id="city" placeholder="Required" th:value="*{city}"/>
             <span class="validationError" th:if="${#fields.hasErrors('city')}"
                   th:errors="*{city}">Name Error</span><br/><br/>
         </div>
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="state">State: </label>
-            <input class="form-control col-5 col-md-2" type="text" th:name="state" id="state" placeholder="Required" th:value="*{state}"/>
+        <div class="form-group">
+            <label for="state">State: </label>
+            <input class="form-control" type="text" th:name="state" id="state" placeholder="Required" th:value="*{state}"/>
             <span class="validationError" th:if="${#fields.hasErrors('state')}"
                   th:errors="*{state}">Name Error</span><br/><br/>
         </div>
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="zip">Zip: </label>
-            <input class="form-control col-5 col-md-2" type="text" th:name="zip" id="zip" placeholder="Required" th:value="*{zip}"/>
+        <div class="form-group">
+            <label for="zip">Zip: </label>
+            <input class="form-control" type="text" th:name="zip" id="zip" placeholder="Required" th:value="*{zip}"/>
             <span class="validationError" th:if="${#fields.hasErrors('zip')}"
                   th:errors="*{zip}">Name Error</span><br/><br/>
         </div>
 
-        <div class="row form-group justify-content-center">
-            <label class="col-form-label col-2 text-right font-weight-bold" for="phone">Phone: </label>
-            <input class="form-control col-5 col-md-2" type="text" placeholder="XXX-XXX-XXXX" th:name="phone" id="phone" th:value="*{phone}"/>
+        <div class="form-group">
+            <label for="phone">Phone: </label>
+            <input class="form-control" type="text" placeholder="XXX-XXX-XXXX" th:name="phone" id="phone" th:value="*{phone}"/>
             <span class="validationError" th:if="${#fields.hasErrors('phone')}"
                   th:errors="*{phone}">Name Error</span><br/><br/>
         </div>
 
         <div class="row form-group justify-content-center">
-                <span class="col-6 col-md-3"></span>
-        <input class="col-1 form-control btn-info" type="submit" value="Register"/><br/>
+<!--                <span class="col-6 col-md-3"></span>-->
+        <input class="col-3 form-control btn-info" type="submit" value="Register"/><br/>
         </div>
     </form>
+</div>
     <div th:replace="fragments/base :: footer"></div>
 <!--    <div th:insert="fragments/base :: scripts"></div>-->
 </body>
