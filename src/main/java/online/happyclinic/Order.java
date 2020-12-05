@@ -39,7 +39,7 @@ public class Order implements Serializable {
     @Pattern(regexp = "[0-9]{5}", message = "Zip code must be 5 digits")
     private String zip;
 
-    @ManyToMany(targetEntity = Facility.class)
+    @OneToMany(targetEntity = Facility.class)
     private List<Facility> facilities = new ArrayList<>();
 
     @ManyToOne
@@ -51,5 +51,9 @@ public class Order implements Serializable {
     @PrePersist
     void placedAt() {
         this.placedAt = LocalDateTime.now();
+    }
+
+    public void  removeDesign(Facility facility) {
+        this.facilities.remove(facility);
     }
 }

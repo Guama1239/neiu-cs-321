@@ -89,16 +89,16 @@ public class ModifyFacilityController {
     }
 
 
-    @GetMapping("/delete/{facilityId}")
-    public String updateFacilityToDelete(@PathVariable("facilityId") long id, Facility facility){
-        Facility newFacility = facilityRepo.findById(id).get();
-        newFacility.setServices(facility.getServices());
-        newFacility.setName(facility.getName());
-       // serviceRepo.deleteAll(List<Service>);
-        facilityRepo.delete(newFacility);
-        log.info("Processing changes.." + newFacility);
-        return "redirect:/primarytableview";
-    }
+//    @GetMapping("/delete/{facilityId}")
+//    public String updateFacilityToDelete(@PathVariable("facilityId") long id, Facility facility){
+//        Facility newFacility = facilityRepo.findById(id).get();
+//        newFacility.setServices(facility.getServices());
+//        newFacility.setName(facility.getName());
+//       // serviceRepo.deleteAll(List<Service>);
+//        facilityRepo.delete(newFacility);
+//        log.info("Processing changes.." + newFacility);
+//        return "redirect:/primarytableview";
+//    }
 
 //    @PostMapping
 //    public String processDeleteFacility(@PathVariable("facilityId") long id, @Valid @ModelAttribute("facility") Facility facility, Errors errors){

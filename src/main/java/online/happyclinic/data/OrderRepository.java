@@ -1,5 +1,6 @@
 package online.happyclinic.data;
 
+import online.happyclinic.Facility;
 import online.happyclinic.Order;
 import online.happyclinic.User;
 import org.springframework.data.domain.Pageable;
@@ -9,4 +10,5 @@ import java.util.List;
 
 public interface OrderRepository extends CrudRepository<Order, Long> {
     List<Order> findAllByUser(User user, Pageable pageable);
+    Order findOrderByFacilities(Facility facility);
 }

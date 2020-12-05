@@ -4,7 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 import online.happyclinic.Facility;
 
 public interface FacilityRepository extends CrudRepository<Facility, Long> {
-
-    @Override
-    void deleteById(Long aLong);
+    Facility findFacilityById(Long Id);
 }
